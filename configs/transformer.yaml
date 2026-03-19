@@ -1,0 +1,110 @@
+# Transformer Model Configuration for BurmeseGLUE
+
+# Model settings
+model:
+  # Model name from HuggingFace Hub
+  name: xlm-roberta-base  # or bert-base-multilingual-cased
+
+  # Task-specific configuration
+  num_labels: 2  # Will be overridden based on task
+
+  # Model initialization
+  pretrained: true
+  cache_dir: ./models/cache
+
+# Training settings
+training:
+  # Optimization
+  learning_rate: 2e-5
+  weight_decay: 0.01
+  adam_epsilon: 1e-8
+  max_grad_norm: 1.0
+
+  # Training loop
+  num_train_epochs: 5
+  per_device_train_batch_size: 16
+  per_device_eval_batch_size: 32
+  gradient_accumulation_steps: 1
+
+  # Learning rate schedule
+  warmup_steps: 500
+  warmup_ratio: 0.1
+  lr_scheduler_type: linear
+
+  # Evaluation & checkpointing
+  eval_strategy: epoch  # or "steps"
+  eval_steps: 500
+  save_strategy: epoch
+  save_steps: 500
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  greater_is_better: false
+
+  # Early stopping
+  early_stopping_patience: 3
+  early_stopping_threshold: 0.001
+
+  # Logging
+  logging_steps: 100
+  logging_dir: ./logs
+  report_to: []  # ["tensorboard", "wandb"] if needed
+
+  # Reproducibility
+  seed: 42
+
+  # Performance
+  fp16: false  # Set to true if GPU supports it
+  dataloader_num_workers: 4
+  dataloader_pin_memory: true
+
+# Data settings
+data:
+  data_dir: ./data
+  cache_dir: ./data/cache
+  max_length: 128  # Maximum sequence length
+
+  # Data preprocessing
+  preprocessing_num_workers: 4
+  overwrite_cache: false
+
+# Evaluation settings
+evaluation:
+  batch_size: 32
+
+  # Output settings
+  output_dir: ./outputs
+  predictions_file: predictions.json
+
+# Task-specific settings
+tasks:
+  sentiment:
+    num_labels: 2  # binary classification
+    metrics: [accuracy, f1, precision, recall]
+    problem_type: single_label_classification
+
+  ner:
+    # NER uses BIO tagging
+    metrics: [span_f1, precision, recall]
+    problem_type: token_classification
+
+  similarity:
+    num_labels: 1  # regression
+    metrics: [pearson, spearman, mse]
+    problem_type: regression
+
+  qa:
+    # Extractive QA
+    metrics: [exact_match, f1]
+    problem_type: question_answering
+    doc_stride: 128
+    max_answer_length: 30
+
+# Multi-task learning (optional, for future)
+multi_task:
+  enabled: false
+  task_weights:
+    sentiment: 1.0
+    ner: 1.0
+    similarity: 1.0
+    qa: 1.0
