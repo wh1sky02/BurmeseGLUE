@@ -9,16 +9,16 @@ Available datasets:
 """
 
 from burmeseglue.datasets.base import BurmeseGLUEDataset
+from burmeseglue.datasets.sentiment import SentimentDataset
 
 # Task-specific datasets will be imported as they're implemented
-# from burmeseglue.datasets.sentiment import SentimentDataset
 # from burmeseglue.datasets.ner import NERDataset
 # from burmeseglue.datasets.similarity import SimilarityDataset
 # from burmeseglue.datasets.qa import QADataset
 
 __all__ = [
     "BurmeseGLUEDataset",
-    # "SentimentDataset",
+    "SentimentDataset",
     # "NERDataset",
     # "SimilarityDataset",
     # "QADataset",
