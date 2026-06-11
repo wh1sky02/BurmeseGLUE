@@ -10,16 +10,14 @@ Available tasks:
 
 from burmeseglue.tasks.base import Task
 from burmeseglue.tasks.classification import ClassificationTask
-
-# Task-specific implementations will be imported as they're implemented
-# from burmeseglue.tasks.token_classification import TokenClassificationTask
-# from burmeseglue.tasks.regression import RegressionTask
-# from burmeseglue.tasks.span_extraction import SpanExtractionTask
+from burmeseglue.tasks.token_classification import TokenClassificationTask
+from burmeseglue.tasks.regression import RegressionTask
+from burmeseglue.tasks.span_extraction import SpanExtractionTask
 
 __all__ = [
     "Task",
     "ClassificationTask",
-    # "TokenClassificationTask",
-    # "RegressionTask",
-    # "SpanExtractionTask",
+    "TokenClassificationTask",
+    "RegressionTask",
+    "SpanExtractionTask",
 ]
