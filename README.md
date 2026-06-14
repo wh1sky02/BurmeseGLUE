@@ -279,11 +279,6 @@ Key areas for contribution:
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
-## Contact
-
-- **GitHub Issues**: [Report bugs or feature requests](https://github.com/yourusername/burmeseglue/issues)
-- **Email**: [your-email@example.com]
-
 ## Acknowledgments
 
 - Inspired by the English GLUE benchmark
